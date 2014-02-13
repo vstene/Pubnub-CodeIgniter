@@ -13,11 +13,11 @@ class Pubnub {
      * Init the Pubnub Client API
      */
     public function __construct() {
-	    $this->CI = get_instance();
-		$this->CI->load->config('pubnub');
-		
-		$this->settings['limit']      = 1800;
-		$this->settings['server']     = 'http://' . $this->CI->config->item('pubnub_origin');
+        $this->CI = get_instance();
+        $this->CI->load->config('pubnub');
+        
+        $this->settings['limit']      = 1800;
+        $this->settings['server']     = 'http://' . $this->CI->config->item('pubnub_origin');
         $this->settings['pub-key']    = $this->CI->config->item('pubnub_pub_key');
         $this->settings['sub-key']    = $this->CI->config->item('pubnub_sub_key');
         $this->settings['secret-key'] = $this->CI->config->item('pubnub_secret_key');
