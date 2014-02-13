@@ -1,11 +1,11 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * PubNub 3.0 Real-time Push Cloud API for CodeIgniter
  */
 class Pubnub {
-		private $CI;
-		private $settings = array ();
+    private $CI;
+    private $settings = array ();
 
     /**
      * Pubnub
@@ -13,12 +13,13 @@ class Pubnub {
      * Init the Pubnub Client API
      */
     public function __construct() {
-		$this->CI = get_instance();
+	    $this->CI = get_instance();
 		$this->CI->load->config('pubnub');
-		$this->settings['limit'] = 1800;
-		$this->settings['server'] = 'http://' . $this->CI->config->item('pubnub_origin');
-        $this->settings['pub-key'] = $this->CI->config->item('pubnub_pub_key');
-        $this->settings['sub-key'] = $this->CI->config->item('pubnub_sub_key');
+		
+		$this->settings['limit']      = 1800;
+		$this->settings['server']     = 'http://' . $this->CI->config->item('pubnub_origin');
+        $this->settings['pub-key']    = $this->CI->config->item('pubnub_pub_key');
+        $this->settings['sub-key']    = $this->CI->config->item('pubnub_sub_key');
         $this->settings['secret-key'] = $this->CI->config->item('pubnub_secret_key');
     }
 
@@ -48,7 +49,7 @@ class Pubnub {
             $this->settings['secret-key'],
             $channel,
             $message
-        ) );
+        ));
 
         ## Sign Message
         $signature = $this->settings['secret-key'] ? md5($string_to_sign) : '0';
@@ -205,7 +206,7 @@ class Pubnub {
     private static function _encode($part) {
         return implode( '', array_map(
             'Pubnub::_encode_char', str_split($part)
-        ) );
+        ));
     }
 
     /**
@@ -215,8 +216,10 @@ class Pubnub {
      * @return string encoded char.
      */
     private static function _encode_char($char) {
-        if (strpos( ' ~`!@#$%^&*()+=[]\\{}|;\':",./<>?', $char ) === false)
+        if (strpos( ' ~`!@#$%^&*()+=[]\\{}|;\':",./<>?', $char ) === false) {
             return $char;
+        }
+        
         return rawurlencode($char);
     }
 }
